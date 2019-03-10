@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>温度管理</title>
+
+  <!--data table-->
+  <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+
+    <!--#include file="/include/publiccss.html"-->
+    <link rel="stylesheet" href="css/lib/table.css?v=201612210001">
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!--#include file="/include/leftSide.html"-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!--#include file="/include/top.html"-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">首页</a>
+                </li>
+                <li class="active"> 能耗查询 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+             <div class="row">
+                <div class="col-sm-12">
+
+                <div class="row state-overview">
+                    <div class="col-md-4 col-xs-4 col-sm-4">
+                        <div class="panel purple">
+                            <div class="symbol">
+                                <i class="fa fa-gavel"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="title">空调模式</div>
+                                <div class="value">
+                                    <span id="allExpectModel">制热</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-4 col-sm-4">
+                        <div class="panel red">
+                            <div class="symbol">
+                                <i class="fa fa-tags"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="title">希望温度</div>
+                                <div class="value">
+                                    <span id="allExpectTemperature">26</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-4 col-sm-4">
+                        <div class="panel blue">
+                            <div class="symbol">
+                                <i class="fa fa-money"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="title"> 外界气温</div>
+                                <div class="value">18 C</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="clearfix">
+                            <div class="btn-group">
+                                <button id="editable-sample_new" class="btn btn-primary" href="#addRoomModal" data-toggle="modal">
+                                    创建房间 <i class="fa fa-plus"></i>
+                                </button>
+                                <button class="btn btn-default" href="#setAllTempModal" data-toggle="modal">
+                                    设置总期望温度 <i class="fa fa-cogs"></i>
+                                </button>
+                            </div>
+                            <div class="btn-group pull-right">
+                                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">更多 <i class="fa fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="#">Print</a></li>
+                                    <li><a href="#">Save as PDF</a></li>
+                                    <li><a href="#">Export to Excel</a></li>
+                                </ul>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-xs-4">
+                                    <div class="form-group form-horizontal">
+                                        <label for="inputBuilding" class="col-xs-4 col-sm-4 control-label">选择栋</label>
+                                        <div class="col-xs-8">
+                                            <select class="form-control">
+                                                <option value="All">全部</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="col-xs-4">-->
+                                    <!--<div class="form-group">-->
+                                        <!--<label for="inputBuilding" class="col-xs-4 col-sm-4 control-label">房间号</label>-->
+                                        <!--<div class="col-xs-8">-->
+                                            <!--<input type="text" class="form-control">-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-4">-->
+                                    <!--<button class="btn btn-info" type="button">查询</button>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </header>
+                    <div class="panel-body">
+                        <div class="adv-table editable-table ">
+                            <div class="space15"></div>
+                            <div id="roomListContext" type="Sheet" allowindex="true" pk="id" class="htsheet" allowselect="false" pagesize="20" AllowPaging="false">
+                                <div type="Cols">
+                                    <div type="Col" key="roomNum" title="房间号" class="noWarp"></div>
+                                    <div type="ColMethod" key="workModel" title="空调模式" class="noWarp">energyexpenPage.getAirModel('{workModel}','{expectModel}','{settingModel}')</div>
+                                    <div type="ColMethod" key="workModel" title="工作模式" class="noWarp">DictionaryMoudle.getWorkModel('{workModel}')</div>
+                                    <div type="Col" key="expectTemperature" title="期望温度值" class="noWarp"></div>
+                                    <div type="Col" key="settingTemperature" title="指定温度值" class="noWarp"></div>
+                                    <div type="ColMethod" key="createdTime" title="创建时间" class="noWarp">DateMoudle.FormatShowDate('{createdTime}',20)</div>
+                                    <div type="ColMethod" key="id" title="操作" class="noWarp">energyexpenPage.operation('{id}')</div>
+                                </div>
+                            </div>
+                            <!--<table class="table table-striped table-hover table-bordered" id="editable-sample">-->
+                                <!--<thead>-->
+                                    <!--<tr>-->
+                                        <!--<th>电表标识</th>-->
+                                        <!--<th>查询时间</th>-->
+                                        <!--<th>电表读数</th>-->
+                                        <!--<th>每月消耗</th>-->
+                                        <!--<th>操作</th>-->
+                                        <!--<th>删除</th>-->
+                                    <!--</tr>-->
+                                <!--</thead>-->
+                                <!--<tbody>-->
+                                    <!--<tr class="">-->
+                                        <!--<td>111111111111111</td>-->
+                                        <!--<td>2016年8月</td>-->
+                                        <!--<td>1111</td>-->
+                                        <!--<td class="center">11</td>-->
+                                        <!--<td><a class="edit" href="javascript:;">编辑</a></td>-->
+                                        <!--<td><a class="delete" href="javascript:;">删除</a></td>-->
+                                    <!--</tr>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+                        </div>
+                    </div>
+                </section>
+                </div>
+             </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <!--#include file="/include/bottom.html"-->
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Modal -->
+<!--添加房间dialog-->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="addRoomModal" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">创建房间</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputBuilding" class="col-lg-4 col-sm-4 control-label">栋号</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="inputBuilding" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRoomNum" class="col-lg-4 col-sm-4 control-label">房间号</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="inputRoomNum" placeholder="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" id="addRoomBtn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--设置房间温度-->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="editRoomModal" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">设置房间温度值</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editRoomId">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+                                <a href="#expectTemperature" data-toggle="tab">期望温度值</a>
+                            </li>
+                            <li class="">
+                                <a href="#settingTemperatureTab" data-toggle="tab">指定温度值</a>
+                            </li>
+                        </ul>
+                    </header>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="expectTemperature">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="inputBuilding" class="col-lg-4 col-sm-4 control-label">工作模式</label>
+                                        <div class="col-lg-8">
+                                            <select class="form-control m-bot15" id="roomExpectModel">
+                                                <option value="cold">制冷</option>
+                                                <option value="hot">制热</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputRoomNum" class="col-lg-4 col-sm-4 control-label">期望温度</label>
+                                        <div class="col-lg-8">
+                                            <input type="number" max="35" min="10" class="form-control" id="roomExpectTemperature" placeholder="">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="settingTemperatureTab">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="inputBuilding" class="col-lg-4 col-sm-4 control-label">工作模式</label>
+                                        <div class="col-lg-8">
+                                            <select class="form-control m-bot15" id="roomSettingModel">
+                                                <option value="cold">制冷</option>
+                                                <option value="hot">制热</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputRoomNum" class="col-lg-4 col-sm-4 control-label">指定温度</label>
+                                        <div class="col-lg-8">
+                                            <input type="number" max="35" min="10" class="form-control" id="roomSettingTemperature" placeholder="">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" id="editRoomBtn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--设置总温度-->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="setAllTempModal" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">设置总期望温度</h4>
+            </div>
+            <div class="modal-body">
+                <!--<input type="hidden" id="editRoomId">-->
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputBuilding" class="col-lg-4 col-sm-4 control-label">工作模式</label>
+                        <div class="col-lg-8">
+                            <select class="form-control m-bot15" id="allRoomExpectModel">
+                                <option value="cold">制冷</option>
+                                <option value="hot">制热</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRoomNum" class="col-lg-4 col-sm-4 control-label">期望温度</label>
+                        <div class="col-lg-8">
+                            <input type="number" max="35" min="10" class="form-control" id="AllRoomExpectTemperature" placeholder="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" id="saveAllTempBtn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
+<!--common scripts for all pages-->
+<!--#include file="/include/publicjs.html"-->
+
+<!--script for editable table-->
+<script src="js/editable-table.js"></script>
+
+<!-- END JAVASCRIPTS -->
+<script type="text/javascript" src="js/engery/temperatureManage.js?v=201902180000"></script>
+</body>
+</html>

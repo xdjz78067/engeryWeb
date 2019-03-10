@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>空调状态</title>
+
+  <!--data table-->
+  <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
+    <!--#include file="/include/publiccss.html"-->
+
+    <link rel="stylesheet" href="css/lib/table.css?v=201612210001">
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!--#include file="/include/leftSide.html"-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!--#include file="/include/top.html"-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">首页</a>
+                </li>
+                <li class="active"> 空调状态 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+             <div class="row">
+                <div class="col-sm-12">
+
+                <div class="row state-overview">
+                    <div class="col-md-4 col-xs-4 col-sm-4">
+                        <div class="panel purple">
+                            <div class="symbol">
+                                <i class="fa fa-gavel"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="title">空调模式</div>
+                                <div class="value">
+                                    <span id="allExpectModel">制热</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-4 col-sm-4">
+                        <div class="panel red">
+                            <div class="symbol">
+                                <i class="fa fa-tags"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="title">希望温度</div>
+                                <div class="value">
+                                    <span id="allExpectTemperature">26</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-4 col-sm-4">
+                        <div class="panel blue">
+                            <div class="symbol">
+                                <i class="fa fa-money"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="title"> 外界气温</div>
+                                <div class="value">18 C</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="clearfix">
+                            <div class="btn-group">
+
+                            </div>
+                            <div class="btn-group pull-right">
+                                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">更多 <i class="fa fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="#">Print</a></li>
+                                    <li><a href="#">Save as PDF</a></li>
+                                    <li><a href="#">Export to Excel</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="panel-body">
+                        <div class="adv-table editable-table ">
+                            <div class="space15"></div>
+                            <div id="roomListContext" type="Sheet" allowindex="true" pk="id" class="htsheet" allowselect="false" pagesize="20" AllowPaging="false">
+                                <div type="Cols">
+                                    <div type="Col" key="roomNum" title="房间号" class="noWarp"></div>
+                                    <div type="Col" key="temperature" title="温度℃" class="noWarp"></div>
+                                    <div type="ColMethod" key="status" title="状态" class="noWarp">airStatusPage.airStatus('{status}')</div>
+                                    <!--<div type="ColMethod" key="id" title="操作" class="noWarp">airStatusPage.operation('{id}')</div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </div>
+             </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <!--#include file="/include/bottom.html"-->
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!--common scripts for all pages-->
+<!--#include file="/include/publicjs.html"-->
+
+<!--script for editable table-->
+<script src="js/editable-table.js"></script>
+
+<!-- END JAVASCRIPTS -->
+<script type="text/javascript" src="js/engery/airStatus.js?v=201902180000"></script>
+</body>
+</html>
