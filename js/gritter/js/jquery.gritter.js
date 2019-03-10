@@ -110,7 +110,7 @@
 				image = params.image || '',
 				sticky = params.sticky || false,
 				item_class = params.class_name || $.gritter.options.class_name,
-				position = $.gritter.options.position,
+				position = params.position ||$.gritter.options.position,
 				time_alive = params.time || '';
 
 			this._verifyWrapper();

@@ -8,7 +8,8 @@
   <link rel="shortcut icon" href="#" type="image/png">
 
   <title>温度管理</title>
-
+    <!--ios7-->
+    <link rel="stylesheet" type="text/css" href="js/ios-switch/switchery.css" />
   <!--data table-->
   <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
 
@@ -43,20 +44,7 @@
                 <div class="col-sm-12">
 
                 <div class="row state-overview">
-                    <div class="col-md-4 col-xs-4 col-sm-4">
-                        <div class="panel purple">
-                            <div class="symbol">
-                                <i class="fa fa-gavel"></i>
-                            </div>
-                            <div class="state-value">
-                                <div class="title">空调模式</div>
-                                <div class="value">
-                                    <span id="allExpectModel">制热</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-xs-4 col-sm-4">
+                    <div class="col-md-3 col-xs-3 col-sm-3">
                         <div class="panel red">
                             <div class="symbol">
                                 <i class="fa fa-tags"></i>
@@ -69,14 +57,39 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-xs-4 col-sm-4">
+                    <div class="col-md-3 col-xs-3 col-sm-3">
+                        <div class="panel purple">
+                            <div class="symbol">
+                                <i class="fa fa-gavel"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="title">空调模式</div>
+                                <div class="value">
+                                    <span id="allExpectModel">制热</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3">
                         <div class="panel blue">
                             <div class="symbol">
-                                <i class="fa fa-money"></i>
+                                <i class="fa fa-cloud"></i>
                             </div>
                             <div class="state-value">
                                 <div class="title"> 外界气温</div>
                                 <div class="value">18 C</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3">
+                        <div class="panel blue">
+                            <div class="symbol">
+                                <i class="fa fa-desktop"></i>
+                            </div>
+                            <div class="state-value">
+                                <div class="title"> 智能模式</div>
+
+                                <input type="checkbox" class="js-switch" checked/>
                             </div>
                         </div>
                     </div>
@@ -85,7 +98,7 @@
                 <section class="panel">
                     <header class="panel-heading">
                         <div class="clearfix">
-                            <div class="btn-group">
+                            <div class="btn-group pull-right">
                                 <button id="editable-sample_new" class="btn btn-primary" href="#addRoomModal" data-toggle="modal">
                                     创建房间 <i class="fa fa-plus"></i>
                                 </button>
@@ -93,20 +106,22 @@
                                     设置总期望温度 <i class="fa fa-cogs"></i>
                                 </button>
                             </div>
-                            <div class="btn-group pull-right">
-                                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">更多 <i class="fa fa-angle-down"></i>
-                                </button>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="#">Print</a></li>
-                                    <li><a href="#">Save as PDF</a></li>
-                                    <li><a href="#">Export to Excel</a></li>
-                                </ul>
-                            </div>
-                            <div class="panel-body">
-                                <div class="col-xs-4">
+                            <div class="space15"></div>
+                            <div class="row">
+                                <div class="col-xs-3">
                                     <div class="form-group form-horizontal">
-                                        <label for="inputBuilding" class="col-xs-4 col-sm-4 control-label">选择栋</label>
-                                        <div class="col-xs-8">
+                                        <label for="inputBuilding" class="col-xs-3 col-sm-3 control-label">地址</label>
+                                        <div class="col-xs-9">
+                                            <select class="form-control">
+                                                <option value="All">全部</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group form-horizontal">
+                                        <label for="inputBuilding" class="col-xs-2 col-sm-2 control-label">栋</label>
+                                        <div class="col-xs-9">
                                             <select class="form-control">
                                                 <option value="All">全部</option>
                                             </select>
@@ -327,6 +342,9 @@
 <!--script for editable table-->
 <script src="js/editable-table.js"></script>
 
+<!--ios7-->
+<script src="js/ios-switch/switchery.js" ></script>
+<script src="js/ios-switch/ios-init.js" ></script>
 <!-- END JAVASCRIPTS -->
 <script type="text/javascript" src="js/engery/temperatureManage.js?v=201902180000"></script>
 </body>
