@@ -8,7 +8,6 @@ var energyexpenPage={
     },
     loadPage:function(){
         this.getRoomList();
-        this.getAllExpectTemperature();
     },
     addEvent:function(){
         $("#addRoomModal").on('show.bs.modal', function(event) {
@@ -22,7 +21,7 @@ var energyexpenPage={
             var params={};
             params.building=$("#inputBuilding").val();
             params.roomNum=$("#inputRoomNum").val();
-            AjaxEngine.ajax('',zjl_platform_domain+'/room',params,function(data){
+            AjaxEngine.ajax('',zjl_platform_domain+'/room/add',params,function(data){
                 if(data.code==200){
                     $("#addRoomModal").modal("hide");
                     alert("创建成功")
@@ -64,7 +63,7 @@ var energyexpenPage={
             var params={};
             params.model=$("#allRoomExpectModel").val();
             params.temperature=$("#AllRoomExpectTemperature").val();
-            AjaxEngine.ajax('',zjl_platform_domain+'/expect',params,function(data){
+            AjaxEngine.ajax('',zjl_platform_domain+'/set_expect',params,function(data){
                 if(data.code==200){
                     $("#setAllTempModal").modal("hide");
                     alert("设置成功")
@@ -91,7 +90,7 @@ var energyexpenPage={
     operation: function(id, copyrightId) {
         var backStr = "";
         backStr += "<a data-toggle=\"modal\" data-target=\"#editRoomModal\" onclick=\"javascript:energyexpenPage.editRoom(" + id + ");\">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;";
-        backStr += "<a onclick=\"javascript:CopyRightControl.copyRightOwnerPSDel(" + copyrightId + "," + id + ");\">删除</a>";
+        backStr += "<a onclick=\"javascript:energyexpenPage.delRoom(" + id + ");\">删除</a>";
         return backStr;
     },
     /**编辑预处理**/
@@ -119,21 +118,6 @@ var energyexpenPage={
             }
         })
     },
-    /**得到总期望温度**/
-    getAllExpectTemperature: function() {
-        AjaxEngine.ajax('',zjl_platform_domain+'/room/expect',{},function(data){
-            if(data.code==200){
-                var dataObj=data.data;
-                $("#allExpectModel").text(DictionaryMoudle.getWorkModel(dataObj.model));
-//                    期望温度值
-                if(dataObj.model=="hot"){
-                    $("#allExpectTemperature").text(dataObj.hotTemperature+"℃");
-                }else{
-                    $("#allExpectTemperature").text(dataObj.coldTemperature+"℃");
-                }
-            }
-        })
-    },
     getAirModel:function (workModel,expectModel,settingModel) {
         var backStr = "";
         if(workModel=="expect"){
@@ -142,7 +126,17 @@ var energyexpenPage={
             backStr+=DictionaryMoudle.getAirModel(settingModel);
         }
         return backStr;
-    }
+    },
+
+    delRoom:function (id) {
+        AjaxEngine.ajax('',zjl_platform_domain+'/room/delete',{id:id},function(data){
+            if(data.code==200){
+               _alert("删除成功")
+            }else{
+                _alert(data.msg)
+            }
+        })
+    },
 };
 $(document).ready(function() {
 //        EditableTable.init();

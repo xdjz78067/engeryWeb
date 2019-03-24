@@ -52,7 +52,7 @@
                             <div class="state-value">
                                 <div class="title">希望温度</div>
                                 <div class="value">
-                                    <span id="allExpectTemperature">26</span>
+                                    <span id="allExpectTemperature"> </span>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                             <div class="state-value">
                                 <div class="title">空调模式</div>
                                 <div class="value">
-                                    <span id="allExpectModel">制热</span>
+                                    <span id="allExpectModel"> </span>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                             </div>
                             <div class="state-value">
                                 <div class="title"> 外界气温</div>
-                                <div class="value">18 C</div>
+                                <div class="value" id="outTemperature"> </div>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                             <div class="state-value">
                                 <div class="title"> 智能模式</div>
 
-                                <input type="checkbox" class="js-switch" checked/>
+                                <input type="checkbox" id="intelligentStatus" class="js-switch" checked="false"/>
                             </div>
                         </div>
                     </div>
@@ -346,6 +346,7 @@
 <script src="js/ios-switch/switchery.js" ></script>
 <script src="js/ios-switch/ios-init.js" ></script>
 <!-- END JAVASCRIPTS -->
+<script type="text/javascript" src="js/engery/roomControl.js?v=201902180000"></script>
 <script type="text/javascript" src="js/engery/temperatureManage.js?v=201902180000"></script>
 </body>
 </html>

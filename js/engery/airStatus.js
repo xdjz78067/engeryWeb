@@ -8,10 +8,11 @@ var airStatusPage={
     },
     loadPage:function(){
         this.getRoomList();
-        this.getAllExpectTemperature();
     },
     addEvent:function(){
+        var _this=this;
     },
+    //房间列表
     getRoomList:function () {
         AjaxEngine.ajax('',zjl_platform_domain+'/room_status',{},function(data){
             if(data.code==200&&data.data.length>0){
@@ -36,21 +37,7 @@ var airStatusPage={
         backStr += "<a onclick=\"javascript:CopyRightControl.copyRightOwnerPSDel(" + copyrightId + "," + id + ");\">删除</a>";
         return backStr;
     },
-    /**得到总期望温度**/
-    getAllExpectTemperature: function() {
-        AjaxEngine.ajax('',zjl_platform_domain+'/room/expect',{},function(data){
-            if(data.code==200){
-                var dataObj=data.data;
-                $("#allExpectModel").text(DictionaryMoudle.getWorkModel(dataObj.model));
-//                    期望温度值
-                if(dataObj.model=="hot"){
-                    $("#allExpectTemperature").text(dataObj.hotTemperature+"℃");
-                }else{
-                    $("#allExpectTemperature").text(dataObj.coldTemperature+"℃");
-                }
-            }
-        })
-    },
+    //状态表示处理
     airStatus:function (status) {
         var backStr = "";
         if(status=="00"){
