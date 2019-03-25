@@ -21,6 +21,7 @@ var energyexpenPage={
             var params={};
             params.building=$("#inputBuilding").val();
             params.roomNum=$("#inputRoomNum").val();
+            params.address=$("#inputAddress").val();
             AjaxEngine.ajax('',zjl_platform_domain+'/room/add',params,function(data){
                 if(data.code==200){
                     $("#addRoomModal").modal("hide");
